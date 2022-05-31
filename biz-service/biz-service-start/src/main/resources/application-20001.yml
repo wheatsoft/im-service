@@ -1,0 +1,5 @@
+dubbo:
+  application:
+  protocol:
+    port: 20001
+

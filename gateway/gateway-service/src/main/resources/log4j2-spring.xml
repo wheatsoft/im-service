@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="instruction-proxy-svr" packages="">
+    <properties>
+        <property name="LOG_HOME">logs/biz-service-start</property>
+    </properties>
+
+    <Appenders>
+        <console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] - [%t] [%p] - %logger{1.} - %m%n"/>
+        </console>
+        <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${LOG_HOME}/server_info.log" immediateFlush="true"
+                                 filePattern="${LOG_HOME}/server_info-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} %p [%X{traceId}] %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+        </RollingRandomAccessFile>
+      <RollingRandomAccessFile name="RollingRandomAccessFileError" fileName="${LOG_HOME}/server_error.log" immediateFlush="true"
+                                 filePattern="${LOG_HOME}/server_error-%d{yyyy-MM-dd}.log">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} %p [%X{traceId}] %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+        </RollingRandomAccessFile>
+           <RollingRandomAccessFile name="socketio" fileName="${LOG_HOME}/socketio.log" immediateFlush="false"
+                                 filePattern="${LOG_HOME}/socketio-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="7">
+                <Delete basePath="${LOG_HOME}/" maxDepth="1">
+                    <IfFileName glob="socketio-*.log" />
+                    <IfLastModified age="7d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+    <RollingRandomAccessFile name="pingLog" fileName="${LOG_HOME}/ping.log" immediateFlush="false"
+                             filePattern="${LOG_HOME}/ping-%d{yyyy-MM-dd}.log">
+        <PatternLayout>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} %p %c{1.} [%t] %m%n</Pattern>
+        </PatternLayout>
+        <Policies>
+            <TimeBasedTriggeringPolicy />
+        </Policies>
+        <DefaultRolloverStrategy max="7">
+            <Delete basePath="${LOG_HOME}/" maxDepth="1">
+                <IfFileName glob="ping-*.log" />
+                <IfLastModified age="7d" />
+            </Delete>
+        </DefaultRolloverStrategy>
+    </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info" includeLocation="false">
+            <AppenderRef ref="RollingRandomAccessFile"/>
+            <AppenderRef ref="RollingRandomAccessFileError"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+          <Logger name="com.corundumstudio.socketio" level="debug" additivity="false">
+            <AppenderRef ref="socketio" />
+        </Logger>
+
+    </Loggers>
+</Configuration>

@@ -1,0 +1,10 @@
+dubbo:
+  application:
+  protocol:
+    port: 20003
+  consumer:
+    loadbalance: customLoadBalance
+
+server:
+  port: 8081
+

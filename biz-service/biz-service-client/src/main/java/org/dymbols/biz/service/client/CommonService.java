@@ -6,7 +6,7 @@ import org.dymbols.biz.service.client.model.ExecuteRes;
 
 public interface CommonService {
 
-    JSONObject execute(JSONObject req);
+    JSONObject execute(JSONObject req) ;
 
     JSONObject execute2(JSONObject req);
 

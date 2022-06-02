@@ -15,14 +15,14 @@ import static org.apache.dubbo.rpc.RpcContext.getClientAttachment;
 @RestController
 public class RouterController {
 
-    @DubboReference(version = "1.0.0")
+    @DubboReference(version = "1.0.0", retries = 1)
     private CommonService commonService;
 
     @DubboReference(version = "1.0.0")
     private OrderService orderService;
 
     @GetMapping("router")
-    public String router(String ip) {
+    public String router(String ip) throws InterruptedException {
         getClientAttachment().setAttachment("ipT", ip);
         JSONObject jsonObject = commonService.execute(new JSONObject());
 

@@ -22,7 +22,7 @@ public class JedisClusterClient {
     public static JedisCluster jc  = null;
 
 
-    private static List<String> redisNodes = Lists.newArrayList("152.136.101.46:6381");
+    private static List<String> redisNodes = Lists.newArrayList("");
     private  static String redisPwd = "uLOf4(r0";
 
     public static void init() {

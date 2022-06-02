@@ -19,10 +19,15 @@ public class CommonServiceImpl implements CommonService {
     private String port;
 
     @Override
-    public JSONObject execute(JSONObject req) {
+    public JSONObject execute(JSONObject req)  {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("port", port);
         logger.info("req:{}", req);
+        try {
+            Thread.sleep(10000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return jsonObject;
     }
 

@@ -4,6 +4,7 @@ dubbo:
     port: 20003
   consumer:
     loadbalance: customLoadBalance
+    cluster: customCluster
 
 server:
   port: 8081

@@ -15,7 +15,7 @@ import static org.apache.dubbo.rpc.RpcContext.getClientAttachment;
 @RestController
 public class RouterController {
 
-    @DubboReference(version = "1.0.0", retries = 1)
+    @DubboReference(version = "1.0.0")
     private CommonService commonService;
 
     @DubboReference(version = "1.0.0")

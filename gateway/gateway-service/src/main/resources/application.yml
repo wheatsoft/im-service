@@ -5,6 +5,7 @@ dubbo:
   consumer:
     loadbalance: customLoadBalance
     cluster: customCluster
+    check: false
 
 server:
   port: 8081

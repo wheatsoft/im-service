@@ -14,6 +14,7 @@ public class ShardThreadPoolExecutor extends AbstractExecutorService {
     private final Condition shutdown = mainLock.newCondition();
 
     private Class clazz = ArrayBlockingQueue.class;
+    private Integer queueSize = 200;
 
     private Integer poolSize = 20;//Runtime.getRuntime().availableProcessors();
     private String poolName = "shard-thread-pool-executor";
@@ -23,7 +24,7 @@ public class ShardThreadPoolExecutor extends AbstractExecutorService {
     private boolean shutDown;
     private boolean shutDownNow;
 
-    private Integer queueSize = 200;
+
 
     public ShardThreadPoolExecutor(int poolSize, String poolName, Class clazz,
 
